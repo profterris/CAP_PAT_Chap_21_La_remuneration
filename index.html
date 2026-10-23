@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La rémunération</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Fiche d'exercices en thème clair : blocs = séances, cartes dépliables, corrections masquables */
+:root {
+  --bg:        #f4f6f9;
+  --surface:   #ffffff;
+  --card:      #ffffff;
+  --border:    #dfe3ea;
+  --border-hi: #b9c0ce;
+  --text:      #1d2230;
+  --text-dim:  #5c6476;
+  --accent:    #b97d00;
+  --accent-bg: #fff6df;
+  --green:     #1b8047;
+  --green-bg:  #ecf7f0;
+  --green-bd:  #c9e6d4;
+  --green-dk:  #12552f;
+  --red:       #c23b3b;
+  --blue:      #2d69ad;
+  --blue-bg:   #edf3fb;
+  --purple:    #6f45ad;
+  --font-head: 'Syne', 'Trebuchet MS', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius:    10px;
+  color-scheme: light;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.site-header {
+  background: linear-gradient(135deg, #ffffff 0%, #eef2f8 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 44px 20px 32px;
+  text-align: center;
+}
+.site-header .kicker {
+  display: inline-block;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 3px;
+  margin-bottom: 18px;
+}
+.site-header h1 {
+  font-family: var(--font-head);
+  font-size: clamp(24px, 6vw, 38px);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.site-header .sub {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 400;
+  max-width: 540px;
+  margin: 0 auto 20px;
+}
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 auto 22px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+
+/* ── NAV ANCRES ──────────────────────────────────────────── */
+.nav-anchors {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.nav-anchors a {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+.nav-anchors a:hover, .nav-anchors a:focus-visible { border-color: var(--accent); color: var(--accent); }
+
+/* ── CONTENEUR PRINCIPAL ─────────────────────────────────── */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 36px 18px 80px;
+}
+
+/* ── TITRE DE BLOC ───────────────────────────────────────── */
+.bloc-titre {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 52px 0 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.bloc-titre:first-child { margin-top: 0; }
+.bloc-titre .icone { font-size: 26px; flex-shrink: 0; }
+.bloc-titre h2 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.bloc-titre h2 small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* ── MÉMO ────────────────────────────────────────────────── */
+.memo {
+  background: var(--green-bg);
+  border: 1px solid var(--green-bd);
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 16px 0 24px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.memo .memo-titre {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.memo code {
+  display: block;
+  background: #ffffff;
+  border: 1px solid var(--green-bd);
+  border-radius: 5px;
+  padding: 8px 12px;
+  color: var(--green-dk);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13.5px;
+  margin: 5px 0;
+}
+.memo .note { color: var(--text-dim); font-size: 13px; margin-top: 8px; }
+
+/* ── CARTE EXERCICE ──────────────────────────────────────── */
+.exo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: border-color .15s;
+}
+.exo-card:hover { border-color: var(--border-hi); }
+
+.exo-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+.exo-header::-webkit-details-marker { display: none; }
+.exo-header:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.exo-num {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  min-width: 40px;
+}
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.badge-1 { background: #e9f6ee; color: var(--green); border: 1px solid #bfe2cc; }
+.badge-2 { background: var(--accent-bg); color: #8a5d00; border: 1px solid #efd798; }
+.badge-3 { background: #fbeaea; color: var(--red); border: 1px solid #efc4c4; }
+.badge-exam { background: #f2ecfa; color: var(--purple); border: 1px solid #d9c9ef; }
+
+.exo-titre-txt {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.chevron { color: var(--text-dim); font-size: 13px; flex-shrink: 0; transition: transform .2s; }
+details[open] .chevron { transform: rotate(180deg); }
+
+/* ── CORPS DE L'EXERCICE ─────────────────────────────────── */
+.exo-body { padding: 0 16px 20px; border-top: 1px solid var(--border); }
+
+.contexte {
+  background: var(--blue-bg);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 16px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.contexte strong { color: var(--text); }
+
+.table-wrap { overflow-x: auto; margin: 12px 0; }
+.tableau-donnees {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--surface);
+}
+.tableau-donnees th {
+  background: #eef1f6;
+  color: var(--text-dim);
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.tableau-donnees td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+.tableau-donnees tr:last-child td { border-bottom: none; }
+.tableau-donnees td.num { font-weight: 700; color: var(--text); white-space: nowrap; }
+
+.questions { margin: 18px 0 0; }
+.question { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+.question .q-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 11px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.question p { font-size: 14px; margin: 0; min-width: 0; }
+
+/* ── COUP DE POUCE ───────────────────────────────────────── */
+.ordre-grandeur {
+  background: var(--accent-bg);
+  border: 1px solid #efd798;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #6e4b00;
+  margin: 12px 0 0;
+}
+.ordre-grandeur::before { content: "💡 "; }
+
+/* ── BOUTON CORRECTION ───────────────────────────────────── */
+.btn-corrige {
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 16px;
+  margin-top: 18px;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-corrige:hover, .btn-corrige:focus-visible { border-color: var(--green); color: var(--green); }
+
+/* ── CORRECTION ──────────────────────────────────────────── */
+.correction {
+  display: none;
+  background: var(--green-bg);
+  border: 1px solid var(--green-bd);
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.correction.visible { display: block; }
+.correction .corr-etape {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--green-bd);
+}
+.correction .corr-etape:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.correction .c-num {
+  display: inline-block;
+  background: var(--green);
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  margin-right: 6px;
+}
+.correction code {
+  display: block;
+  background: #ffffff;
+  border: 1px solid var(--green-bd);
+  border-radius: 4px;
+  padding: 6px 12px;
+  color: var(--green-dk);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  margin: 5px 0;
+}
+.correction .res { font-family: var(--font-head); font-weight: 700; color: var(--text); }
+.correction .conclu { margin-top: 8px; font-size: 13.5px; color: #2c6244; font-style: italic; }
+.correction .tableau-corr { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; background: #ffffff; }
+.correction .tableau-corr th {
+  background: #dff0e6;
+  color: var(--green-dk);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  text-align: left;
+}
+.correction .tableau-corr td { padding: 6px 10px; border-bottom: 1px solid var(--green-bd); color: #24402f; vertical-align: top; }
+.correction .tableau-corr td.val { font-weight: 700; color: var(--green); }
+
+/* ── SÉPARATEUR ──────────────────────────────────────────── */
+hr.section-sep { border: none; border-top: 1px solid var(--border); margin: 54px 0 0; }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  background: var(--surface);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .exo-titre-txt { font-size: 13.5px; }
+  .contexte { font-size: 13.5px; }
+  .tableau-donnees { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="kicker">🧁 Gestion appliquée – CAP pâtissier</div>
+  <h1>La rémunération<br>du salarié</h1>
+  <p class="sub">Chapitre 21. 18 exercices en 5 séances, avec la boulangerie-pâtisserie La Fournée Sucrée. Ouvre un exercice, réponds sur ton cahier, puis vérifie avec la correction.</p>
+  <div class="legende">
+    <span class="badge badge-1">⬆ décollage</span> je découvre
+    <span class="badge badge-2">◆ intermédiaire</span> j'applique
+    <span class="badge badge-exam">★ examen</span> je m'entraîne
+  </div>
+  <nav class="nav-anchors">
+    <a href="#duree">1 · Le temps de travail</a>
+    <a href="#heures-sup">2 · Heures sup et nuit</a>
+    <a href="#repos">3 · Repos et congés</a>
+    <a href="#salaire">4 · Le salaire</a>
+    <a href="#examen">5 · Sujets type examen</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 1 – LE TEMPS DE TRAVAIL (séance 1)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="duree">
+  <span class="icone">⏰</span>
+  <h2><small>Séance 1 · 1 h</small>Bloc 1 – Combien d'heures je travaille ?</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>Travail effectif = temps où le salarié suit les consignes de l'employeur, sans pouvoir s'occuper de ses affaires personnelles.</code>
+  <code>Durée légale = 35 h par semaine = 151,67 h par mois = 1 607 h par an.</code>
+  <code>Temps partiel = durée inférieure à la durée légale.</code>
+  <code>Durée maximale : 10 h par jour (7 h pour un mineur) · 48 h par semaine · 44 h en moyenne sur 12 semaines.</code>
+  <code>Travailleur de nuit : au moins 3 h entre 21 h et 6 h, au moins 2 fois par semaine, ou au moins 270 h de nuit par an.</code>
+  <p class="note">Manuel : partie 1 A, documents 1 et 2, questions 1 à 5. La convention collective peut prévoir une autre durée : chaque salarié doit consulter la sienne.</p>
+</div>
+
+<!-- EX 1 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 1</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Travail effectif ou pas ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Yanis vient d'être embauché à <strong>La Fournée Sucrée</strong>, une boulangerie-pâtisserie artisanale. Mme Morel, la patronne, lui pose une devinette sur sa journée. Lis la définition du travail effectif dans ton manuel (partie 1 A).
+    </div>
+    <div class="table-wrap">
+      <table class="tableau-donnees">
+        <tr><th>Moment de la journée de Yanis</th><th>Travail effectif ?</th></tr>
+        <tr><td>a. Il dresse des choux sur plaque.</td><td>?</td></tr>
+        <tr><td>b. Il prend le bus pour venir au laboratoire.</td><td>?</td></tr>
+        <tr><td>c. Il nettoie et désinfecte son plan de travail.</td><td>?</td></tr>
+        <tr><td>d. Il déjeune chez lui pendant sa coupure.</td><td>?</td></tr>
+        <tr><td>e. Il reste au four, à la demande de Mme Morel, pour surveiller la cuisson des génoises.</td><td>?</td></tr>
+      </table>
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Réponds par oui ou non pour chaque moment.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Réponds à la question 1 du manuel : qu'est-ce que le travail effectif ?</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> pose-toi la question : est-ce que Yanis obéit à une consigne de la patronne, ou est-ce qu'il est libre ?</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span>
+        <table class="tableau-corr">
+          <tr><th>Moment</th><th>Réponse</th></tr>
+          <tr><td>a. Dresser des choux</td><td class="val">Oui</td></tr>
+          <tr><td>b. Trajet en bus</td><td class="val">Non</td></tr>
+          <tr><td>c. Nettoyage du poste</td><td class="val">Oui</td></tr>
+          <tr><td>d. Déjeuner chez lui</td><td class="val">Non</td></tr>
+          <tr><td>e. Surveiller la cuisson</td><td class="val">Oui</td></tr>
+        </table>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <p class="res">C'est la période pendant laquelle le salarié doit effectuer le travail demandé par l'employeur et ne peut pas effectuer des tâches personnelles.</p>
+        <p class="conclu">Le nettoyage du poste fait partie du travail : il est donc payé.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 2 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 2</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Le mystère des 151,67 heures</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Sur le contrat de Yanis, il est écrit : <strong>151,67 heures par mois</strong>. Yanis ne comprend pas : « pourquoi un nombre à virgule ? ». Ton manuel donne la réponse (questions 2 et 3).
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Indique combien d'heures par semaine correspondent à 151,67 heures par mois.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Retrouve le calcul qui permet de passer de la semaine au mois.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Explique pourquoi on ne fait pas simplement 35 × 4.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> une année compte 52 semaines et 12 mois.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <span class="c-num">1</span> <span class="res">35 heures par semaine.</span>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">2</span>
+        <code>(35 h × 52 semaines) ÷ 12 mois = 1 820 ÷ 12 = 151,67 h</code>
+      </div>
+      <div class="corr-etape">
+        <span class="c-num">3</span> Un mois compte un peu plus de 4 semaines. 35 × 4 = 140 h : il manquerait des heures.
+        <p class="conclu">151,67 h, c'est la moyenne d'un mois de travail à temps plein.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 3 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 3</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Vrai ou faux : les limites du temps de travail</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Avant les fêtes, l'équipe de <strong>La Fournée Sucrée</strong> discute au vestiaire. Vérifie chaque phrase avec le document 1 de ton manuel.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Yanis, 19 ans : « je peux travailler 11 h demain pour finir les bûches ».</p></div>
+      <div class="question"><span class="q-num">2</span><p>Chloé, 17 ans, apprentie : « moi, c'est 7 h par jour maximum ».</p></div>
+      <div class="question"><span class="q-num">3</span><p>Mme Morel : « cette semaine, tout le monde fera 50 h ».</p></div>
+      <div class="question"><span class="q-num">4</span><p>Karim, 25 ans : « j'ai fait 46 h cette semaine, c'est autorisé ».</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> regarde d'abord l'âge de la personne, puis compare avec les chiffres du document 1.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Faux.</span> Un majeur peut travailler 10 h par jour maximum (question 4 du manuel).</div>
+      <div class="corr-etape"><span class="c-num">2</span> <span class="res">Vrai.</span> Un mineur peut travailler 7 h par jour maximum.</div>
+      <div class="corr-etape"><span class="c-num">3</span> <span class="res">Faux.</span> Le maximum est de 48 h par semaine.</div>
+      <div class="corr-etape"><span class="c-num">4</span> <span class="res">Vrai</span>, car 46 h est inférieur à 48 h. Attention : sur 12 semaines de suite, la moyenne ne doit pas dépasser 44 h.
+        <p class="conclu">L'âge change les règles : un mineur est plus protégé.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 4 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 4</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Yanis, travailleur de nuit ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Yanis travaille de <strong>3 h à 11 h</strong>, 5 jours par semaine. Son ami Théo, pâtissier dans une autre boutique, travaille de <strong>5 h 30 à 13 h</strong>, 5 jours par semaine. Utilise le document 2 du manuel.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Calcule le nombre d'heures que Yanis travaille chaque jour entre 21 h et 6 h.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Indique si Yanis est un travailleur de nuit. Justifie (question 5 du manuel).</p></div>
+      <div class="question"><span class="q-num">3</span><p>Indique si Théo est un travailleur de nuit. Justifie.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> dessine une ligne de 21 h à 6 h et colorie les heures travaillées.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span>
+        <code>De 3 h à 6 h = 3 heures de nuit par jour</code>
+      </div>
+      <div class="corr-etape"><span class="c-num">2</span> <span class="res">Oui.</span> Il accomplit 3 heures de son temps de travail quotidien entre 21 h et 6 h, et cela plus de 2 fois par semaine.</div>
+      <div class="corr-etape"><span class="c-num">3</span> <span class="res">Non.</span> De 5 h 30 à 6 h, il ne fait que 30 minutes de nuit par jour, donc moins de 3 h. Sur l'année : 0,5 h × 5 jours × environ 47 semaines ≈ 118 h, donc moins de 270 h.
+        <p class="conclu">Le statut de travailleur de nuit donne droit à des compensations : on le verra au bloc 2.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 2 – HEURES SUPPLÉMENTAIRES ET NUIT (séance 2)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="heures-sup" style="margin-top:40px">
+  <span class="icone">🌙</span>
+  <h2><small>Séance 2 · 1 h</small>Bloc 2 – Heures supplémentaires et travail de nuit</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>Heures supplémentaires = heures faites au-delà de 35 h par semaine (maximum 329 h par an).</code>
+  <code>De la 36e à la 43e heure : majoration de 25 %. À partir de la 44e heure : majoration de 50 %.</code>
+  <code>Repos compensateur = repos donné par l'employeur, d'une durée égale aux heures travaillées, à la place du paiement.</code>
+  <code>Toute heure travaillée entre 20 h et 6 h : majoration de 25 % du salaire de base (pour tous les salariés).</code>
+  <code>Travailleur de nuit : 1 journée de repos si au moins 270 h de nuit par an · 2 journées si plus de 600 h.</code>
+  <p class="note">Manuel : partie 1 B, document 3, questions 6 à 8.</p>
+</div>
+
+<!-- EX 5 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 5</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Je compte mes heures supplémentaires</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Voici les heures de Yanis sur 3 semaines à <strong>La Fournée Sucrée</strong>.
+    </div>
+    <div class="table-wrap">
+      <table class="tableau-donnees">
+        <tr><th>Semaine</th><th>Heures travaillées</th></tr>
+        <tr><td>Semaine A (septembre)</td><td class="num">35 h</td></tr>
+        <tr><td>Semaine B (Pâques)</td><td class="num">40 h</td></tr>
+        <tr><td>Semaine C (Noël)</td><td class="num">46 h</td></tr>
+      </table>
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Réponds à la question 6 du manuel : qu'appelle-t-on heures supplémentaires ?</p></div>
+      <div class="question"><span class="q-num">2</span><p>Calcule le nombre d'heures supplémentaires pour chaque semaine.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Indique le taux de majoration de chaque heure supplémentaire.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> la 36e heure est la première heure sup. La 43e est la dernière à 25 %. Cela fait 8 heures à 25 %.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Ce sont toutes les heures de travail effectuées au-delà de la durée légale de 35 heures par semaine.</span></div>
+      <div class="corr-etape"><span class="c-num">2</span>
+        <table class="tableau-corr">
+          <tr><th>Semaine</th><th>Heures sup</th><th>Majoration</th></tr>
+          <tr><td>A</td><td class="val">0 h</td><td>aucune</td></tr>
+          <tr><td>B</td><td class="val">40 – 35 = 5 h</td><td>5 h à 25 %</td></tr>
+          <tr><td>C</td><td class="val">46 – 35 = 11 h</td><td>8 h à 25 % + 3 h à 50 %</td></tr>
+        </table>
+      </div>
+      <div class="corr-etape"><span class="c-num">3</span> Semaine C : de la 36e à la 43e heure = 8 h à 25 %. De la 44e à la 46e heure = 3 h à 50 %.
+        <p class="conclu">Plus on dépasse, plus la majoration augmente.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 6 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 6</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Combien rapportent mes heures sup ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Le salaire de base de Yanis est de <strong>12 € de l'heure</strong> (montant choisi pour l'exercice). On reprend ses semaines B et C de l'exercice 5.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Calcule le prix d'une heure majorée à 25 %, puis d'une heure majorée à 50 %.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Calcule le montant des heures supplémentaires de la semaine B.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Calcule le montant des heures supplémentaires de la semaine C.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> + 25 %, c'est multiplier par 1,25. + 50 %, c'est multiplier par 1,5.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span>
+        <code>Heure à 25 % : 12 × 1,25 = 15 €</code>
+        <code>Heure à 50 % : 12 × 1,5 = 18 €</code>
+      </div>
+      <div class="corr-etape"><span class="c-num">2</span>
+        <code>5 h × 15 € = 75 €</code>
+      </div>
+      <div class="corr-etape"><span class="c-num">3</span>
+        <code>8 h × 15 € = 120 € · 3 h × 18 € = 54 €</code>
+        <p class="res">Total semaine C : 120 + 54 = 174 €</p>
+        <p class="conclu">Ces heures peuvent aussi être remplacées, en tout ou partie, par un repos compensateur.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 7 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 7</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Je relie chaque situation à sa compensation</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Fais la question 8 du manuel. Utilise le document 3 et la partie 1 B. Écris les paires sur ton cahier : 1-?, 2-?, 3-?, 4-?.
+    </div>
+    <div class="table-wrap">
+      <table class="tableau-donnees">
+        <tr><th>Situation</th><th>Compensation</th></tr>
+        <tr><td>1. Vous avez travaillé 40 h cette semaine.</td><td>A. 2 journées par an de repos compensateur</td></tr>
+        <tr><td>2. Vous n'êtes pas travailleur de nuit, mais vous finissez tous les jours à 21 h.</td><td>B. 8 h sup majorées à 25 % + 3 h majorées à 50 %</td></tr>
+        <tr><td>3. Travailleur de nuit, vous faites 780 h de nuit dans l'année.</td><td>C. 5 h sup majorées à 25 %</td></tr>
+        <tr><td>4. En décembre, vous avez travaillé 46 h la semaine avant Noël.</td><td>D. 1 h majorée à 25 % du salaire de base</td></tr>
+      </table>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> pour la situation 2, compte les heures entre 20 h et 21 h.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <table class="tableau-corr">
+          <tr><th>Situation</th><th>Réponse</th><th>Pourquoi</th></tr>
+          <tr><td>1</td><td class="val">C</td><td>40 – 35 = 5 h, toutes entre la 36e et la 43e heure.</td></tr>
+          <tr><td>2</td><td class="val">D</td><td>De 20 h à 21 h = 1 h de nuit, majorée à 25 %.</td></tr>
+          <tr><td>3</td><td class="val">A</td><td>780 h, c'est plus de 600 h : 2 journées de repos.</td></tr>
+          <tr><td>4</td><td class="val">B</td><td>11 h sup : 8 h à 25 % et 3 h à 50 %.</td></tr>
+        </table>
+        <p class="conclu">Le document 3 vient de la convention collective de la boulangerie-pâtisserie, pas du Code du travail.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 8 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 8</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">La prime de nuit de Yanis</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Yanis travaille de <strong>3 h à 11 h</strong>, 5 jours par semaine, avec un salaire de base de <strong>12 € de l'heure</strong>. Sur l'année, il fait environ <strong>705 heures de nuit</strong>. Utilise le document 3.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Calcule le nombre d'heures majorées par jour pour le travail de nuit.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Calcule le montant de la majoration de nuit pour une semaine.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Indique le nombre de journées de repos compensateur auxquelles Yanis a droit dans l'année. Justifie.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> la majoration de 25 % s'applique aux heures entre 20 h et 6 h. Majoration d'une heure = 12 × 0,25.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <code>De 3 h à 6 h = 3 h majorées par jour</code></div>
+      <div class="corr-etape"><span class="c-num">2</span>
+        <code>Majoration d'une heure : 12 × 0,25 = 3 €</code>
+        <code>3 h × 5 jours = 15 h · 15 h × 3 € = 45 € par semaine</code>
+      </div>
+      <div class="corr-etape"><span class="c-num">3</span> <span class="res">2 journées</span>, car 705 h est supérieur à 600 h de travail effectif de nuit dans l'année civile.
+        <p class="conclu">Le travailleur de nuit a donc deux avantages : une majoration d'argent et du repos en plus.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 3 – REPOS ET CONGÉS (séance 3)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="repos" style="margin-top:40px">
+  <span class="icone">🏖️</span>
+  <h2><small>Séance 3 · 1 h</small>Bloc 3 – Les repos, les jours fériés et les congés</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>Repos quotidien : au moins 11 h de suite (12 h pour un mineur).</code>
+  <code>Pause : 20 minutes après 6 h de travail effectif.</code>
+  <code>Repos hebdomadaire : au moins 24 h de suite (2 jours de suite pour un mineur). Travail le dimanche : + 20 %.</code>
+  <code>Jour férié travaillé : salaire doublé pour cette journée.</code>
+  <code>Congés payés : 2,5 jours ouvrables par mois de travail · 30 jours (5 semaines) pour une année complète.</code>
+  <code>Période de référence : du 1er juin au 31 mai de l'année suivante. Congés pris entre le 1er mai et le 31 octobre.</code>
+  <code>Plus de 12 jours de congés : l'employeur peut demander de les fractionner. Moins de 12 jours : pris en continu.</code>
+  <p class="note">Manuel : partie 1 C, document 4, questions 9 à 17.</p>
+</div>
+
+<!-- EX 9 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 9</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Une pause, un repos : j'ai le droit ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Yanis commence à <strong>3 h</strong>. Un jeudi, un collègue est absent. Mme Morel lui demande de finir à <strong>11 h</strong> et de revenir à <strong>21 h</strong> pour préparer les commandes du samedi.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Indique à partir de quelle heure Yanis peut prendre sa pause, et sa durée (question 11 du manuel).</p></div>
+      <div class="question"><span class="q-num">2</span><p>Calcule le temps de repos entre 11 h et 21 h.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Dis si la demande de Mme Morel est autorisée. Justifie (question 9 du manuel).</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> 3 h + 6 h de travail = ?</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Une pause de 20 minutes après 6 h de travail effectif, soit à partir de 9 h.</span></div>
+      <div class="corr-etape"><span class="c-num">2</span> <code>De 11 h à 21 h = 10 h de repos</code></div>
+      <div class="corr-etape"><span class="c-num">3</span> <span class="res">Non.</span> Yanis doit bénéficier d'un repos quotidien de 11 h. 10 h, ce n'est pas assez.
+        <p class="conclu">Le repos protège la santé et la sécurité au laboratoire (fatigue, brûlures, coupures).</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 10 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 10</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Dimanches et jours fériés à la pâtisserie</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Le dimanche matin, la file d'attente déborde sur le trottoir de <strong>La Fournée Sucrée</strong>. Mme Morel prévoit le planning de mai. Lis le document 4.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Yanis travaillera deux dimanches dans le mois. Dis si c'est permis et ce qu'il obtient (question 12 du manuel).</p></div>
+      <div class="question"><span class="q-num">2</span><p>Mme Morel lui demande de travailler le 1er mai. Donne les conséquences (question 10 du manuel).</p></div>
+      <div class="question"><span class="q-num">3</span><p>Cite les 2 autres jours fériés du mois de mai, avec le document 4.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> dans le document 4, cherche tous les jours fériés qui tombent en mai. L'un d'eux tombe toujours un jeudi.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Oui.</span> Il peut travailler le dimanche. Ces heures sont payées 20 % de plus. Il doit obligatoirement avoir 24 heures de repos consécutives à un autre moment de la semaine.</div>
+      <div class="corr-etape"><span class="c-num">2</span> <span class="res">Il peut travailler le 1er mai, mais il touchera le double de son salaire pour cette journée.</span></div>
+      <div class="corr-etape"><span class="c-num">3</span> Le 8 mai et le jeudi de l'Ascension.
+        <p class="conclu">Attention : le titre du document 4 indique « article 27 du Code du travail », mais le texte vient de la convention collective (article 27), comme le dit la consigne du manuel.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 11 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 11</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Je calcule mes congés payés</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Chloé a été embauchée à <strong>La Fournée Sucrée</strong> le <strong>1er janvier 2024</strong>. Elle rêve d'une semaine à la mer en été. Lis le paragraphe « les congés » de ton manuel.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Dis quels salariés ont droit aux congés payés (question 13 du manuel).</p></div>
+      <div class="question"><span class="q-num">2</span><p>Retrouve le calcul qui donne 30 jours de congés par an (question 15).</p></div>
+      <div class="question"><span class="q-num">3</span><p>Donne la période de référence de Chloé (question 16).</p></div>
+      <div class="question"><span class="q-num">4</span><p>Calcule ses jours de congés à la fin de cette période (question 17).</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> la période de référence se termine toujours le 31 mai. Compte les mois de janvier à mai.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Tous les salariés ayant travaillé au moins un mois chez le même employeur.</span></div>
+      <div class="corr-etape"><span class="c-num">2</span> <code>2,5 jours × 12 mois = 30 jours</code></div>
+      <div class="corr-etape"><span class="c-num">3</span> <span class="res">Du 1er janvier 2024 au 31 mai 2024.</span></div>
+      <div class="corr-etape"><span class="c-num">4</span> <code>2,5 jours × 5 mois = 12,5 jours de congés</code>
+        <p class="conclu">Les congés se comptent en jours ouvrables : 30 jours = 5 semaines.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 12 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 12</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Mes congés coupés en deux ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Yanis veut prendre <strong>10 jours de congés en août</strong>. Mme Morel lui répond : « prends 5 jours en août et 5 jours en octobre ». Karim, lui, veut prendre <strong>24 jours</strong> d'un coup en juillet.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Dis si Mme Morel peut couper les congés de Yanis. Justifie (question 14 du manuel).</p></div>
+      <div class="question"><span class="q-num">2</span><p>Dis si Mme Morel peut demander à Karim de fractionner ses congés. Justifie.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Karim voudrait partir en décembre. Indique la règle de la convention collective sur la période des congés.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> le nombre important dans la règle, c'est 12 jours.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Non.</span> La convention collective prévoit que des congés de moins de 12 jours ne peuvent pas être fractionnés : ils sont pris en continu.</div>
+      <div class="corr-etape"><span class="c-num">2</span> <span class="res">Oui.</span> Karim demande plus de 12 jours : l'employeur peut lui demander de fractionner.</div>
+      <div class="corr-etape"><span class="c-num">3</span> Les congés payés doivent être pris entre le 1er mai et le 31 octobre.
+        <p class="conclu">Dans une pâtisserie, décembre est la période la plus chargée : c'est logique que les congés soient pris en été.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 4 – LE SALAIRE (séance 4)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="salaire" style="margin-top:40px">
+  <span class="icone">💶</span>
+  <h2><small>Séance 4 · 1 h</small>Bloc 4 – Du SMIC au salaire net</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 mémo</div>
+  <code>SMIC = salaire minimum interprofessionnel de croissance. Personne ne peut être payé en dessous, sauf les apprentis et les salariés de moins de 18 ans.</code>
+  <code>Le SMIC est fixé par le Gouvernement. Il est revalorisé chaque 1er janvier, et en cours d'année si besoin.</code>
+  <code>Salaire net = salaire brut – cotisations salariales.</code>
+  <code>Salaire superbrut = salaire brut + cotisations patronales = ce que le salarié coûte à l'employeur.</code>
+  <code>Éléments variables : heures sup · prime de nuit · prime du dimanche · prime des jours fériés · prime de fin d'année · prime « chou blanc ».</code>
+  <p class="note">Manuel : partie 2, documents 5 et 6, questions 18 à 26. Le document 5 donne le SMIC de novembre 2024. Depuis le 1er juin 2026, le SMIC horaire brut est de 12,31 €, soit 1 867,02 € brut par mois pour 35 h.</p>
+</div>
+
+<!-- EX 13 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 13</span>
+    <span class="badge badge-1">⬆ décollage</span>
+    <span class="exo-titre-txt">Le SMIC en 4 questions</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Chloé, 17 ans, apprentie, compare sa paie avec celle de Karim, 25 ans, salarié. Elle s'étonne : « on n'a pas tous droit au SMIC ? ». Lis le paragraphe 2 A et le document 5.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Écris la signification du sigle SMIC (question 18).</p></div>
+      <div class="question"><span class="q-num">2</span><p>Dis si l'employeur fixe librement le salaire. Justifie (question 19).</p></div>
+      <div class="question"><span class="q-num">3</span><p>Cite les deux catégories de personnes qui peuvent être payées en dessous du SMIC (question 20). Chloé en fait-elle partie ?</p></div>
+      <div class="question"><span class="q-num">4</span><p>Dis qui décide de la hausse du SMIC, et quand (questions 21 et 22).</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> toutes les réponses sont dans le paragraphe « définition » du 2 A.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Salaire minimum interprofessionnel de croissance.</span></div>
+      <div class="corr-etape"><span class="c-num">2</span> <span class="res">Oui</span>, le salaire est fixé librement par l'employeur, mais il ne peut pas être inférieur au SMIC.</div>
+      <div class="corr-etape"><span class="c-num">3</span> Les apprentis et les salariés de moins de 18 ans. <span class="res">Chloé fait partie des deux catégories.</span></div>
+      <div class="corr-etape"><span class="c-num">4</span> C'est le Gouvernement. Il est revalorisé chaque année au 1er janvier, mais aussi en cours d'année si le Gouvernement l'estime nécessaire.
+        <p class="conclu">Exemple récent : le SMIC a augmenté au 1er janvier 2026, puis à nouveau au 1er juin 2026.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 14 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 14</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Brut, net, superbrut : qui paie quoi ?</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Voici les montants du mois d'octobre de Karim, pâtissier à <strong>La Fournée Sucrée</strong> (chiffres arrondis, choisis pour l'exercice).
+    </div>
+    <div class="table-wrap">
+      <table class="tableau-donnees">
+        <tr><th>Élément</th><th>Montant</th></tr>
+        <tr><td>Salaire brut</td><td class="num">1 900 €</td></tr>
+        <tr><td>Cotisations salariales</td><td class="num">418 €</td></tr>
+        <tr><td>Cotisations patronales</td><td class="num">570 €</td></tr>
+      </table>
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Calcule le salaire net de Karim.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Calcule ce que Karim coûte à Mme Morel ce mois-ci. Donne le nom de ce montant.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Fais le vrai ou faux de la question 23 du manuel, avec une justification pour chaque ligne.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> le net, c'est ce qui arrive sur le compte du salarié. On enlève, on n'ajoute pas.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <code>1 900 – 418 = 1 482 € net</code></div>
+      <div class="corr-etape"><span class="c-num">2</span> <code>1 900 + 570 = 2 470 €</code> <span class="res">C'est le salaire superbrut.</span></div>
+      <div class="corr-etape"><span class="c-num">3</span>
+        <table class="tableau-corr">
+          <tr><th>Affirmation</th><th>Réponse</th><th>Justification</th></tr>
+          <tr><td>Le coût réel du salarié = salaire superbrut</td><td class="val">Vrai</td><td>Brut + cotisations patronales.</td></tr>
+          <tr><td>Le contrat indique le salaire net</td><td class="val">Faux</td><td>C'est le salaire brut.</td></tr>
+          <tr><td>Net = brut – cotisations salariales</td><td class="val">Vrai</td><td>Les cotisations salariales sont retenues sur le brut.</td></tr>
+          <tr><td>Les cotisations patronales sont payées par le salarié</td><td class="val">Faux</td><td>Elles sont payées par l'employeur.</td></tr>
+          <tr><td>Les cotisations financent chômage et retraite</td><td class="val">Vrai</td><td>Elles ouvrent des droits au salarié quand il en a besoin.</td></tr>
+        </table>
+        <p class="conclu">Pour l'entreprise, un salarié coûte bien plus que son salaire net : c'est une charge du coût de production.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 15 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 15</span>
+    <span class="badge badge-2">◆ intermédiaire</span>
+    <span class="exo-titre-txt">Le schéma des éléments variables</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Fais la question 24 du manuel : complète le schéma des 6 éléments variables du salaire. Utilise le paragraphe 2 C et le document 6.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Complète les 6 cases du schéma dans ton manuel.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Pour chaque élément, donne un exemple de situation à La Fournée Sucrée.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> 4 éléments sont dans le texte de définition, 2 sont dans le document 6.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape">
+        <table class="tableau-corr">
+          <tr><th>Élément variable</th><th>Exemple</th></tr>
+          <tr><td class="val">Heures supplémentaires</td><td>46 h la semaine de Noël.</td></tr>
+          <tr><td class="val">Prime travail de nuit</td><td>Yanis commence à 3 h.</td></tr>
+          <tr><td class="val">Prime travail dimanche</td><td>Service du dimanche matin.</td></tr>
+          <tr><td class="val">Prime jours fériés</td><td>Travail le 1er mai.</td></tr>
+          <tr><td class="val">Prime de fin d'année</td><td>Karim, présent depuis 3 ans.</td></tr>
+          <tr><td class="val">Prime « chou blanc »</td><td>Le salarié est renvoyé chez lui à son arrivée.</td></tr>
+        </table>
+        <p class="conclu">Ces éléments s'ajoutent au salaire de base : c'est pour cela que le brut change d'un mois à l'autre.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 16 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 16</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Prime de fin d'année et prime « chou blanc »</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Nous sommes le <strong>15 janvier</strong>. Yanis travaille à <strong>La Fournée Sucrée</strong> depuis 7 mois. Karim y travaille depuis 3 ans.<br>
+      Le mardi suivant, le fournisseur de farine n'a pas livré. La production est arrêtée. Quand Yanis arrive à 3 h, Mme Morel lui dit de rentrer chez lui.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Dis si Yanis touche la prime de fin d'année. Justifie (question 25 du manuel).</p></div>
+      <div class="question"><span class="q-num">2</span><p>Dis si Karim la touche, et à quelle date au plus tard.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Dis si Yanis a droit à une compensation pour le mardi. Justifie (question 26).</p></div>
+      <div class="question"><span class="q-num">4</span><p>Calcule cette compensation si le salaire horaire minimum professionnel national est de 12,40 € (montant fictif).</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> dans le document 6, la prime « chou blanc » correspond à un nombre d'heures précis.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <span class="res">Non.</span> Il faut 1 an de présence dans l'entreprise. Yanis n'a que 7 mois.</div>
+      <div class="corr-etape"><span class="c-num">2</span> <span class="res">Oui</span> : plus d'un an d'ancienneté et présent au 31 décembre. Paiement le 15 janvier au plus tard.</div>
+      <div class="corr-etape"><span class="c-num">3</span> <span class="res">Oui.</span> Il est venu à l'heure convenue et il a été décommandé à ce moment précis : il touche la prime « chou blanc ».</div>
+      <div class="corr-etape"><span class="c-num">4</span> <code>8 h × 12,40 € = 99,20 €</code>
+        <p class="conclu">Cette prime protège le salarié quand l'entreprise ne peut pas le faire travailler.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr class="section-sep">
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOC 5 – SUJETS TYPE EXAMEN (séance 5)
+══════════════════════════════════════════════════════════ -->
+<div class="bloc-titre" id="examen" style="margin-top:40px">
+  <span class="icone">🏆</span>
+  <h2><small>Séance 5 · 1 h</small>Bloc 5 – Sujets type examen</h2>
+</div>
+
+<div class="memo">
+  <div class="memo-titre">🗂 méthode</div>
+  <code>1. Lis la situation et souligne les nombres (heures, âge, dates).</code>
+  <code>2. Retrouve la règle dans ton manuel ou dans les mémos des blocs 1 à 4.</code>
+  <code>3. Écris le calcul en entier, puis le résultat avec son unité (h, €, jours).</code>
+  <code>4. Fais une phrase de conclusion.</code>
+  <p class="note">Ces sujets reprennent l'ensemble du chapitre. Travaille sans regarder les corrections, puis compare.</p>
+</div>
+
+<!-- EX 17 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 17</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Planning de Chloé : je vérifie la conformité</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Chloé a <strong>17 ans</strong>. Elle est apprentie à <strong>La Fournée Sucrée</strong>. Voici le planning que Mme Morel a préparé pour elle. Il contient des erreurs.
+    </div>
+    <div class="table-wrap">
+      <table class="tableau-donnees">
+        <tr><th>Jour</th><th>Horaires</th><th>Durée</th></tr>
+        <tr><td>Lundi</td><td>repos</td><td class="num">–</td></tr>
+        <tr><td>Mardi</td><td>6 h – 13 h</td><td class="num">7 h</td></tr>
+        <tr><td>Mercredi</td><td>6 h – 14 h</td><td class="num">8 h</td></tr>
+        <tr><td>Jeudi</td><td>6 h – 13 h, puis 17 h – 19 h</td><td class="num">9 h</td></tr>
+        <tr><td>Vendredi</td><td>6 h – 13 h</td><td class="num">7 h</td></tr>
+        <tr><td>Samedi</td><td>6 h – 13 h</td><td class="num">7 h</td></tr>
+        <tr><td>Dimanche</td><td>6 h – 12 h</td><td class="num">6 h</td></tr>
+      </table>
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Calcule le total d'heures de la semaine.</p></div>
+      <div class="question"><span class="q-num">2</span><p>Repère les jours où la durée maximale par jour n'est pas respectée.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Vérifie le repos hebdomadaire de Chloé.</p></div>
+      <div class="question"><span class="q-num">4</span><p>Vérifie le repos quotidien entre jeudi soir et vendredi matin.</p></div>
+      <div class="question"><span class="q-num">5</span><p>Propose une correction du planning, à rédiger en une phrase pour Mme Morel.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> Chloé est mineure. Relis les règles pour les mineurs : par jour, repos quotidien, repos hebdomadaire.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <code>7 + 8 + 9 + 7 + 7 + 6 = 44 h</code></div>
+      <div class="corr-etape"><span class="c-num">2</span> Mercredi (8 h) et jeudi (9 h) dépassent <span class="res">7 h par jour, maximum pour un mineur</span>.</div>
+      <div class="corr-etape"><span class="c-num">3</span> Chloé n'a que le lundi en repos. Un mineur doit avoir <span class="res">2 jours consécutifs de repos</span>.</div>
+      <div class="corr-etape"><span class="c-num">4</span> <code>De 19 h à 6 h = 11 h de repos</code> Un mineur doit avoir <span class="res">12 h de repos quotidien</span> : ce n'est pas respecté.</div>
+      <div class="corr-etape"><span class="c-num">5</span> Exemple : « Madame, Chloé étant mineure, il faut limiter ses journées à 7 h, supprimer le retour du jeudi soir et lui donner 2 jours de repos de suite, par exemple dimanche et lundi. »
+        <p class="conclu">Un planning se vérifie toujours avec l'âge du salarié.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- EX 18 -->
+<details class="exo-card">
+  <summary class="exo-header">
+    <span class="exo-num">Ex. 18</span>
+    <span class="badge badge-exam">★ examen</span>
+    <span class="exo-titre-txt">Sujet complet : la semaine de Noël de Yanis</span>
+    <span class="chevron">▼</span>
+  </summary>
+  <div class="exo-body">
+    <div class="contexte">
+      Yanis, <strong>19 ans</strong>, est pâtissier à <strong>La Fournée Sucrée</strong>. Son salaire de base est de <strong>12 € de l'heure</strong> (montant choisi pour l'exercice). La semaine de Noël, il a travaillé <strong>44 heures</strong>, dont :
+      <br>– 4 heures entre 20 h et 6 h (prime de nuit, document 3) ;
+      <br>– 7 heures le dimanche ;
+      <br>– 6 heures le 25 décembre.
+      <br>Dans cet exercice, on calcule chaque élément à part, puis on les additionne.
+    </div>
+    <div class="questions">
+      <div class="question"><span class="q-num">1</span><p>Calcule le salaire de base de la semaine (35 h).</p></div>
+      <div class="question"><span class="q-num">2</span><p>Calcule le nombre d'heures supplémentaires et leur montant.</p></div>
+      <div class="question"><span class="q-num">3</span><p>Calcule la majoration de nuit.</p></div>
+      <div class="question"><span class="q-num">4</span><p>Calcule la majoration du dimanche.</p></div>
+      <div class="question"><span class="q-num">5</span><p>Calcule le supplément pour le 25 décembre.</p></div>
+      <div class="question"><span class="q-num">6</span><p>Calcule le salaire brut de la semaine. Indique si le salaire net sera plus grand ou plus petit, et pourquoi.</p></div>
+    </div>
+    <div class="ordre-grandeur"><strong>Coup de pouce :</strong> jour férié = salaire doublé, donc on ajoute une deuxième fois le salaire de ces 6 heures. Dimanche = + 20 %, donc 12 × 0,20 par heure.</div>
+    <button class="btn-corrige" onclick="toggleCorr(this)">✅ Voir la correction</button>
+    <div class="correction">
+      <div class="corr-etape"><span class="c-num">1</span> <code>35 h × 12 € = 420 €</code></div>
+      <div class="corr-etape"><span class="c-num">2</span> 44 – 35 = 9 h sup : 8 h à 25 % et 1 h à 50 % (la 44e heure).
+        <code>8 × 12 × 1,25 = 120 € · 1 × 12 × 1,5 = 18 € · total = 138 €</code>
+      </div>
+      <div class="corr-etape"><span class="c-num">3</span> <code>4 h × 12 × 0,25 = 12 €</code></div>
+      <div class="corr-etape"><span class="c-num">4</span> <code>7 h × 12 × 0,20 = 16,80 €</code></div>
+      <div class="corr-etape"><span class="c-num">5</span> <code>6 h × 12 € = 72 € de supplément</code></div>
+      <div class="corr-etape"><span class="c-num">6</span>
+        <table class="tableau-corr">
+          <tr><th>Élément</th><th>Montant</th></tr>
+          <tr><td>Salaire de base</td><td class="val">420,00 €</td></tr>
+          <tr><td>Heures supplémentaires</td><td class="val">138,00 €</td></tr>
+          <tr><td>Majoration de nuit</td><td class="val">12,00 €</td></tr>
+          <tr><td>Majoration du dimanche</td><td class="val">16,80 €</td></tr>
+          <tr><td>Supplément jour férié</td><td class="val">72,00 €</td></tr>
+          <tr><td><strong>Salaire brut de la semaine</strong></td><td class="val">658,80 €</td></tr>
+        </table>
+        <p class="res">Le salaire net sera plus petit : on retire les cotisations salariales du brut.</p>
+        <p class="conclu">Les fêtes rapportent plus au salarié, mais elles coûtent aussi plus cher à l'employeur.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+</main>
+
+<footer class="site-footer">
+  CAP pâtissier – Gestion appliquée &nbsp;|&nbsp; Chapitre 21 : la rémunération &nbsp;|&nbsp; 18 exercices progressifs
+</footer>
+
+<script>
+function toggleCorr(btn) {
+  const corr = btn.nextElementSibling;
+  const isVisible = corr.classList.contains('visible');
+  corr.classList.toggle('visible', !isVisible);
+  btn.textContent = isVisible ? '✅ Voir la correction' : '🔒 Masquer la correction';
+}
+</script>
+</body>
+</html>
